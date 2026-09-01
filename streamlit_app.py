@@ -1,6 +1,5 @@
 # Import python packages
 import streamlit as st
-from snowflake.snowpark.context import get_active_session
 from snowflake.snowpark.functions import col
 
 # App title
@@ -17,8 +16,9 @@ name_on_order = st.text_input("Name on smoothie:")
 
 st.write("The name on your smoothie will be", name_on_order)
 
-# Connect to Snowflake
-session = get_active_session()
+# Connect to Streamlit
+cnx = st.connection("snowflake")
+session = cnx.session()
 
 # Get fruit options
 my_dataframe = (
